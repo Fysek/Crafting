@@ -1,4 +1,5 @@
-import a2
+import Maze
+import Rat
 import tkinter
 import tkinter.filedialog
 import tkinter.font
@@ -11,18 +12,18 @@ FONT = ('Courier New', 18, 'bold')
 
 # Up, down, left, right for player 1.
 RAT_1_KEYS = {
-    'w': (a2.UP, a2.NO_CHANGE),
-    'a': (a2.NO_CHANGE, a2.LEFT),
-    's': (a2.DOWN, a2.NO_CHANGE),
-    'd': (a2.NO_CHANGE, a2.RIGHT)
+    'w': (Rat.UP, Rat.NO_CHANGE),
+    'a': (Rat.NO_CHANGE, Rat.LEFT),
+    's': (Rat.DOWN, Rat.NO_CHANGE),
+    'd': (Rat.NO_CHANGE, Rat.RIGHT)
 }
 
 # Up, down, left, right for player 2.
 RAT_2_KEYS = {
-    'i': (a2.UP, a2.NO_CHANGE),
-    'j': (a2.NO_CHANGE, a2.LEFT),
-    'k': (a2.DOWN, a2.NO_CHANGE),
-    'l': (a2.NO_CHANGE, a2.RIGHT)
+    'i': (Rat.UP, Rat.NO_CHANGE),
+    'j': (Rat.NO_CHANGE, Rat.LEFT),
+    'k': (Rat.DOWN, Rat.NO_CHANGE),
+    'l': (Rat.NO_CHANGE, Rat.RIGHT)
 }
 
 
@@ -72,8 +73,8 @@ class MazeApp(tkinter.Frame):
         self.rat_2_score_var = tkinter.IntVar()
 
         # Display rat_1's score.
-        self.display_score(score_frame, self.rat_1_score_var, a2.RAT_1_CHAR)
-        self.display_score(score_frame, self.rat_2_score_var, a2.RAT_2_CHAR)
+        self.display_score(score_frame, self.rat_1_score_var, Rat.RAT_1_CHAR)
+        self.display_score(score_frame, self.rat_2_score_var, Rat.RAT_2_CHAR)
 
         # # Display rat_2's score.
         # tkinter.Label(score_frame, text="rat_2: ", font=FONT).pack(
@@ -191,12 +192,12 @@ def find_rats_replace_hallway(maze_list):
     for r in range(len(maze_list)):
         for c in range(len(maze_list[r])):
 
-            if maze_list[r][c] == a2.RAT_1_CHAR:
-                rat_1 = a2.Rat(a2.RAT_1_CHAR, r, c)
-                maze_list[r][c] = a2.HALL
-            elif maze_list[r][c] == a2.RAT_2_CHAR:
-                rat_2 = a2.Rat(a2.RAT_2_CHAR, r, c)
-                maze_list[r][c] = a2.HALL
+            if maze_list[r][c] == Rat.RAT_1_CHAR:
+                rat_1 = Rat.Rat(Rat.RAT_1_CHAR, r, c)
+                maze_list[r][c] = Maze.HALL
+            elif maze_list[r][c] == Rat.RAT_2_CHAR:
+                rat_2 = Rat.Rat(Rat.RAT_2_CHAR, r, c)
+                maze_list[r][c] = Maze.HALL
 
     return (rat_1, rat_2)
 
@@ -212,7 +213,7 @@ def main():
 
     rat_1, rat_2 = find_rats_replace_hallway(maze_list)
 
-    the_maze = a2.Maze(maze_list, rat_1, rat_2)
+    the_maze = Maze.Maze(maze_list, rat_1, rat_2)
     app = MazeApp(root, the_maze)
     app.mainloop()
 
