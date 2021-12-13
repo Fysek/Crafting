@@ -1,4 +1,12 @@
 # PyExercises
+<!-- PREREQUISITES -->
+### Prerequisites
+
+For the software point of view, only python packages are needed to run the application.
+Execute this command to install all required python packages:
+  ```sh
+  python -m pip install -r requirements
+  ```
 
 <!-- CARRENTAL -->
 ## CarRental
