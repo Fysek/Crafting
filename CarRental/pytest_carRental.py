@@ -1,68 +1,67 @@
 import pytest
 from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 from carRental import CarRental
 from customer import Customer
 
 
-def test_Car_Rental_displays_correct_stock(self):
+def test_Car_Rental_displays_correct_stock():
     shop1 = CarRental()
     shop2 = CarRental(10)
     assert shop1.displaystock() == 0
     assert shop2.displaystock() == 10
     
-def test_rentCarOnHourlyBasis_for_negative_number_of_cars(self):
+def test_rentCarOnHourlyBasis_for_negative_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnHourlyBasis(-1) == None
 
-def test_rentCarOnHourlyBasis_for_zero_number_of_cars(self):
+def test_rentCarOnHourlyBasis_for_zero_number_of_cars():
     shop = CarRental(10)
-    assert (shop.rentOnHourlyBasis(0) == None
+    assert shop.rentOnHourlyBasis(0) == None
 
-def test_rentCarOnHourlyBasis_for_valid_positive_number_of_cars(self):
+def test_rentCarOnHourlyBasis_for_valid_positive_number_of_cars():
     shop = CarRental(10)
     hour = datetime.now().hour
     assert shop.rentOnHourlyBasis(2).hour == hour
 
-def test_rentCarOnHourlyBasis_for_invalid_positive_number_of_cars(self):
+def test_rentCarOnHourlyBasis_for_invalid_positive_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnHourlyBasis(11) == None
 
-def test_rentCarOnDailyBasis_for_negative_number_of_cars(self):
+def test_rentCarOnDailyBasis_for_negative_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnDailyBasis(-1) == None
 
-def test_rentCarOnDailyBasis_for_zero_number_of_cars(self):
+def test_rentCarOnDailyBasis_for_zero_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnDailyBasis(0) == None
 
-def test_rentCarOnDailyBasis_for_valid_positive_number_of_cars(self):
+def test_rentCarOnDailyBasis_for_valid_positive_number_of_cars():
     shop = CarRental(10)
     hour = datetime.now().hour
     assert shop.rentOnDailyBasis(2).hour == hour
 
-def test_rentCarOnDailyBasis_for_invalid_positive_number_of_cars(self):
+def test_rentCarOnDailyBasis_for_invalid_positive_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnDailyBasis(11) == None
 
-def test_rentCarOnWeeklyBasis_for_negative_number_of_cars(self):
+def test_rentCarOnWeeklyBasis_for_negative_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnWeeklyBasis(-1) == None
 
-def test_rentCarOnWeeklyBasis_for_zero_number_of_cars(self):
+def test_rentCarOnWeeklyBasis_for_zero_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnWeeklyBasis(0) == None
 
-def test_rentCarOnWeeklyBasis_for_valid_positive_number_of_cars(self):
+def test_rentCarOnWeeklyBasis_for_valid_positive_number_of_cars():
     shop = CarRental(10)
     hour = datetime.now().hour
     assert shop.rentOnWeeklyBasis(2).hour == hour
 
-def test_rentCarOnWeeklyBasis_for_invalid_positive_number_of_cars(self):
+def test_rentCarOnWeeklyBasis_for_invalid_positive_number_of_cars():
     shop = CarRental(10)
     assert shop.rentOnWeeklyBasis(11) == None
 
-def test_returnCar_for_invalid_rentalTime(self):
+def test_returnCar_for_invalid_rentalTime():
     # create a shop and a customer
     shop = CarRental(10)
     customer = Customer()
@@ -74,7 +73,7 @@ def test_returnCar_for_invalid_rentalTime(self):
     # manually check return function with error values
     assert shop.returnCar((0,0,0)) == None
     
-def test_returnCar_for_invalid_rentalBasis(self):
+def test_returnCar_for_invalid_rentalBasis():
     # create a shop and a customer
     shop = CarRental(10)
     customer = Customer()
@@ -89,7 +88,7 @@ def test_returnCar_for_invalid_rentalBasis(self):
     request = customer.returnCar()
     assert shop.returnCar(request) == 0
 
-def test_returnCar_for_invalid_numOfCars(self):
+def test_returnCar_for_invalid_numOfCars():
  
     # create a shop and a customer
     shop = CarRental(10)
@@ -105,7 +104,7 @@ def test_returnCar_for_invalid_numOfCars(self):
     request = customer.returnCar()
     assert shop.returnCar(request) == None
 
-def test_returnCar_for_valid_credentials(self):
+def test_returnCar_for_valid_credentials():
  
     # create a shop and a various customers
     shop = CarRental(50)
@@ -147,7 +146,7 @@ def test_returnCar_for_valid_credentials(self):
     customer5.rentalTime = datetime.now() + timedelta(weeks=-6)
     customer6.rentalTime = datetime.now() + timedelta(weeks=-12)
     customer7.rentalTime = datetime.now() + timedelta(weeks=-8)
-    customer8.rentalTime = datetime.now() + timedelta(weeks=16)
+    customer8.rentalTime = datetime.now() + timedelta(weeks=-16)
 
     # make all customers return their cars
     request1 = customer1.returnCar()
@@ -166,10 +165,10 @@ def test_returnCar_for_valid_credentials(self):
     assert shop.returnCar(request4) == 15600
     assert shop.returnCar(request5) == 58500
     assert shop.returnCar(request6) == 234000
-    assert shop.returnCar(request7) == 58500
-    assert shop.returnCar(request8) == 234000
+    assert shop.returnCar(request7) == 24000
+    assert shop.returnCar(request8) == 120000
 
-def test_returnCar_with_valid_input(self):
+def test_returnCar_with_valid_input():
     # create a customer
     customer = Customer()
 
@@ -181,7 +180,7 @@ def test_returnCar_with_valid_input(self):
 
     assert customer.returnCar() == (now, 1, 4)
 
-def test_returnCar_with_invalid_input(self):
+def test_returnCar_with_invalid_input():
     # create a customer
     customer = Customer()
 

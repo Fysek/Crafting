@@ -1,5 +1,10 @@
 # PyExercises
 
+<!-- CARRENTAL -->
+## CarRental
+Application for a car rental company. It uses a real clock for timing the rent time.
+Tested with unittest and pytest.
+
 <!-- CODESAMPLES -->
 ## CodeSamples
 Simple functions for training basic syntax. 
